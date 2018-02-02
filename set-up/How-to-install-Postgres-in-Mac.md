@@ -30,10 +30,21 @@ brew services stop postgresql
 
 #### How to create a DB in Postgres via command line?
 
+**Apporach 1:**
+
 https://www.postgresql.org/docs/9.1/static/app-createdb.html
 
 ```
 createdb -p 5432 -h localhost -e localDB
+
+```
+
+**Apporach 2:**
+
+- Running  the create DataBase command the postgres client.
+
+```
+CREATE DATABASE lusiadas;
 
 ```
 
