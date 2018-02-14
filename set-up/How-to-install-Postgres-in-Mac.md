@@ -25,8 +25,14 @@ How to Stop PostGres?
 
 ```
 brew services stop postgresql
+```
+
+#### How to create a user in Postgres via command line?
 
 ```
+createuser postgres -s
+```
+
 
 #### How to create a DB in Postgres via command line?
 
