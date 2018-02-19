@@ -2,6 +2,21 @@
 
 ## How to download Kafka ?
 
+**Approach 1**
+
+Step 1:   
+
+https://kafka.apache.org/downloads
+
+Step 2:  
+
+Modify the **server.properties** file.
+
+```
+advertised.listeners=PLAINTEXT://localhost:9092
+```
+
+**Approach 2**
 ```
 curl "http://mirror.metrocast.net/apache/kafka/0.10.2.0/kafka_2.12-0.10.2.0.tgz" | tar xz
 ```
@@ -19,6 +34,7 @@ zookeeper-server-start.bat ..\..\config\zookeeper.properties
 ```
 ./zookeeper-server-start.sh ../config/zookeeper.properties
 ```
+
 ## How to start a Kafka Broker ?
 
 **Windows:**
@@ -39,9 +55,6 @@ kafka-server-start.bat ..\..\config\server.properties
 ```
 kafka-topics.bat --create --topic inputItemTopic -zookeeper localhost:2181 --replication-factor 1 --partitions 3.
 
-kafka-topics.bat --create --topic outputItemTopic -zookeeper localhost:2181 --replication-factor 1 --partitions 3.
-
-
 kafka-topics.bat --create --topic errorTopic -zookeeper localhost:2181 --replication-factor 1 --partitions 3.
 ```
 
@@ -50,8 +63,6 @@ kafka-topics.bat --create --topic errorTopic -zookeeper localhost:2181 --replica
 
 ```
 ./kafka-topics.sh --create --topic inputItemTopic -zookeeper localhost:2181 --replication-factor 1 --partitions 3
-
-./kafka-topics.sh --create --topic outputItemTopic -zookeeper localhost:2181 --replication-factor 1 --partitions 3
 
 ./kafka-topics.sh --create --topic errorTopic -zookeeper localhost:2181 --replication-factor 1 --partitions 3
 
@@ -74,15 +85,11 @@ kafka-topics.bat --describe --zookeeper localhost:2181
 ```
 kafka-topics.bat --describe --topic inputItemTopic --zookeeper localhost:2181
 
-kafka-topics.bat --describe --topic outputItemTopic --zookeeper localhost:2181
-
 kafka-topics.bat --describe --topic errorTopic --zookeeper localhost:2181
 ```
 **MAC:**  
 ```
 ./kafka-topics.sh --describe --topic inputItemTopic --zookeeper localhost:2181
-
-./kafka-topics.sh --describe --topic outputItemTopic --zookeeper localhost:2181
 
 ./kafka-topics.sh --describe --topic errorTopic --zookeeper localhost:2181
 ```
@@ -93,23 +100,37 @@ kafka-topics.bat --describe --topic errorTopic --zookeeper localhost:2181
 
 ```
 kafka-console-producer.bat --broker-list localhost:9092 --topic inputItemTopic
+kafka-console-producer.bat --broker-list localhost:9092 --topic errorTopic
 ```
 
 **MAC:**  
 
 ```
 ./kafka-console-producer.sh --broker-list localhost:9092 --topic inputItemTopic
+./kafka-console-producer.sh --broker-list localhost:9092 --topic errorTopic
+```
+
+## How to publish multiple messages using a console producer?
+
+
+**MAC**
+
+```
+./kafka-consumer-perf-test.sh --topic inputItemTopic
 ```
 
 ## How to instantiate a Console Consumer?
 
 ```
-kafka-console-consumer.bat --zookeeper localhost:2181 --topic inputItemTopic --from-beginning.
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic inputItemTopic --from-beginning
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic errorTopic --from-beginning
 
 ```
 
 ```
-./kafka-console-consumer.sh --zookeeper localhost:2181 --topic inputItemTopic --from-beginning
+./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic inputItemTopic --from-beginning
+./kafka-console-consumer.sh --bootstrap-server localhost:9092  --topic errorTopic --from-beginning
+
 ```
 
 ## How to delete a topic?
