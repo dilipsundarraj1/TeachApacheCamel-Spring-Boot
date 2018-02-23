@@ -1,0 +1,140 @@
+spring:
+  profiles:
+    active: dev
+server.port: 8081
+camel:
+  springboot:
+    shutdownTimeout: 1
+    health.indicator.enabled: true
+management:
+    security:
+           enabled: false
+
+info.app.name: Spring Spring Boot Camel Application
+info.app.description: This is my first spring boot + camel application
+info.app.version: 1.0.0
+
+---
+
+spring:
+  profiles: mock
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/localDB
+    username: postgres
+    password: postgres
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: alertsdilip@gmail.com
+    password:
+    properties.mail.smtp.auth:  true
+    properties.mail.smtp.starttls.enable: true
+
+mail.smtp.starttls.enable: true
+
+mailto: alertsdilip@gmail.com
+mailFrom: alertsdilip@gmail.com
+
+message:   Hello from DEV Profile
+triggerTime: 10s
+startRoute: direct:input
+fromRoute: direct:input1
+toRoute: mock:output
+toRoute1: mock:output1
+toRoute2: mock:output2
+error: mock:output3
+healthRoute: direct:health
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/localDB
+    username: postgres
+    password: postgres
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: alertsdilip@gmail.com
+    password: alertsdilip123
+    properties.mail.smtp.auth:  true
+    properties.mail.smtp.starttls.enable: true
+
+mailto: alertsdilip@gmail.com
+mailFrom: alertsdilip@gmail.com
+message:    Hello from STAGE Profile
+
+startRoute: timer:hello?period=10s
+#fromRoute: file:data/input?delete=true&readLock=nones
+fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+toRoute: file:data/output
+toRoute1: jdbc:dataSource
+toRoute2: file:data/output?fileName=Success.txt
+error: file:data/output?fileName=Error.txt
+healthRoute: timer:health?period=10s
+
+---
+
+spring:
+  profiles: stage
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/localDB
+    username: postgres
+    password: postgres
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: alertsdilip@gmail.com
+    password:
+    properties.mail.smtp.auth:  true
+    properties.mail.smtp.starttls.enable: true
+
+mailto: alertsdilip@gmail.com
+mailFrom: alertsdilip@gmail.com
+message:    Hello from STAGE Profile
+
+startRoute: timer:hello?period=10s
+#fromRoute: file:data/input?delete=true&readLock=nones
+fromRoute: file:data/input?delete=true&readLock=none&moveFailed=error
+toRoute: file:data/output
+toRoute1: jdbc:dataSource
+toRoute2: file:data/output?fileName=Success.txt
+error: file:data/output?fileName=Error.txt
+healthRoute: timer:health?period=10s
+
+
+---
+
+spring:
+  profiles: prod
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/localDB
+    username: postgres
+    password: postgres
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: alertsdilip@gmail.com
+    password:
+    properties.mail.smtp.auth:  true
+    properties.mail.smtp.starttls.enable: true
+
+mailto: alertsdilip@gmail.com
+mailFrom: alertsdilip@gmail.com
+
+message:    Hello from PROD Profile
+triggerTime: 10s
+
+startRoute: timer:hello?period=10s
+fromRoute: file:data/input?delete=true&readLock=none&eagerDeleteTargetFile&eagerDeleteTargetFile=true
+toRoute: file:data/output
+toRoute1: jdbc:dataSource
+toRoute2: file:data/output?fileName=Success.txt
+error: file:data/output?fileName=Error.txt
+healthRoute: timer:health?period=10s
+---

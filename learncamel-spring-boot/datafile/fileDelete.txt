@@ -1,0 +1,2 @@
+type,sku#,item description,price
+DELETE,100,Samsung TV,500.00

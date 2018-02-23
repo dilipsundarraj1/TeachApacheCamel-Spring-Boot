@@ -1,0 +1,4 @@
+type,sku#,item description,price
+ADD,100,Samsung TV,500.00
+ADD,101,LG TV,300.00
+ADD,,Sony TV,300.00
