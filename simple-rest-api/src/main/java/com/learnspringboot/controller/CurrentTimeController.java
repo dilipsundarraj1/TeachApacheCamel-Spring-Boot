@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by z001qgd on 1/7/18.
  */
@@ -15,8 +17,8 @@ public class CurrentTimeController {
     CurrentTimeService currentTimeService;
 
     @RequestMapping(value = "/currentTime")
-    public String getCurrentDateTime(){
-
+    public String getCurrentDateTime() throws InterruptedException {
+        System.out.println("controller getCurrentDateTime call"+ LocalDateTime.now().toString());
         return currentTimeService.getCurrentDateTime();
 
     }
