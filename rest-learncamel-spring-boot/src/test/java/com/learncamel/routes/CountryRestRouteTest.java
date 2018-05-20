@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 @ActiveProfiles("dev")
 @RunWith(CamelSpringBootRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class CountryRestRouteTest extends CamelTestSupport{
     @Autowired
@@ -47,6 +48,7 @@ public class CountryRestRouteTest extends CamelTestSupport{
     Environment environment;
 
     TestRestTemplate testRestTemplate;
+
     @Before
     public void setUp(){
 
@@ -64,7 +66,17 @@ public class CountryRestRouteTest extends CamelTestSupport{
 
         assertNotNull(countryList);
 
+    }
 
+    @Test
+    public void getCurrentTime() {
+        // Call the REST API
+        ResponseEntity<String> response = testRestTemplate.getForEntity("http://localhost:8081/getCurrentTime", String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        System.out.println("Body is " + response.getBody());
+        assertNotNull(response.getBody());
 
     }
+
+
 }
