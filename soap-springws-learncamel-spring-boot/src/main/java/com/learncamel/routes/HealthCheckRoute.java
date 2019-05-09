@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by z001qgd on 2/10/18.
  */
-@Component
+//@Component
 public class HealthCheckRoute extends RouteBuilder{
 
 

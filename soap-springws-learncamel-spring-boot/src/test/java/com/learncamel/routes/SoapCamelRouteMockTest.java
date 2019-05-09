@@ -54,40 +54,45 @@ public class SoapCamelRouteMockTest extends CamelTestSupport{
 
     }
 
-    private String getCountrybyCountryCodeRequest = "<GetCountryByCountryCode xmlns=\"http://www.webserviceX.NET\">\n" +
-            "      <CountryCode>GB</CountryCode>\n" +
-            "    </GetCountryByCountryCode>";
+    private String getCountrybyCountryCodeRequest = "<FullCountryInfo xmlns=\"http://www.oorsprong.org/websamples.countryinfo\">\n" +
+            "      <sCountryISOCode>GB</sCountryISOCode>\n" +
+            "    </FullCountryInfo>";
 
-    private String countryWebServiceUri = "http://www.webservicex.net/country.asmx";
+    private String countryWebServiceUri = "http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso";
 
 
     @Test
     public void countryNameByCountryCode() throws Exception {
         String result = (String) producerTemplate.requestBodyAndHeader("direct:input", getCountrybyCountryCodeRequest,
                 SpringWebserviceConstants.SPRING_WS_ENDPOINT_URI, countryWebServiceUri);
-
-
-        System.out.println(" resultMessage : " + result);
-
+        System.out.println("result : " + result);
         assertTrue(result.contains("Great Britain"));
     }
 
     @Test
     public void parseCountryCode(){
 
-        String input = "<GetCountryByCountryCodeResponse xmlns=\"http://www.webserviceX.NET\"><GetCountryByCountryCodeResult>&lt;NewDataSet&gt;\n" +
-                "  &lt;Table&gt;\n" +
-                "    &lt;countrycode&gt;us&lt;/countrycode&gt;\n" +
-                "    &lt;name&gt;United States&lt;/name&gt;\n" +
-                "  &lt;/Table&gt;\n" +
-                "  &lt;Table&gt;\n" +
-                "    &lt;countrycode&gt;us&lt;/countrycode&gt;\n" +
-                "    &lt;name&gt;United States&lt;/name&gt;\n" +
-                "  &lt;/Table&gt;\n" +
-                "&lt;/NewDataSet&gt;</GetCountryByCountryCodeResult></GetCountryByCountryCodeResponse>";
+        String input = "<m:FullCountryInfoResponse xmlns:m=\"http://www.oorsprong.org/websamples.countryinfo\">\n" +
+                "      <m:FullCountryInfoResult>\n" +
+                "        <m:sISOCode>IN</m:sISOCode>\n" +
+                "        <m:sName>India</m:sName>\n" +
+                "        <m:sCapitalCity>New Delhi</m:sCapitalCity>\n" +
+                "        <m:sPhoneCode>91</m:sPhoneCode>\n" +
+                "        <m:sContinentCode>AS</m:sContinentCode>\n" +
+                "        <m:sCurrencyISOCode>INR</m:sCurrencyISOCode>\n" +
+                "        <m:sCountryFlag>http://www.oorsprong.org/WebSamples.CountryInfo/Images/India.jpg</m:sCountryFlag>\n" +
+                "        <m:Languages>\n" +
+                "          <m:tLanguage>\n" +
+                "            <m:sISOCode>hin</m:sISOCode>\n" +
+                "            <m:sName>Hindi</m:sName>\n" +
+                "          </m:tLanguage>\n" +
+                "        </m:Languages>\n" +
+                "      </m:FullCountryInfoResult>\n" +
+                "    </m:FullCountryInfoResponse>";
 
-        Country country = (Country) producerTemplate.requestBodyAndHeader(environment.getProperty("fromRoute"),input,"env",environment.getProperty("spring.profiles.active"));
+        Country country = (Country)
+        producerTemplate.requestBodyAndHeader(environment.getProperty("fromRoute"),input,"env",environment.getProperty("spring.profiles.active"));
 
-        assertEquals("us", country.getCountrycode());
+       assertEquals("IN", country.getsISOCode());
     }
 }

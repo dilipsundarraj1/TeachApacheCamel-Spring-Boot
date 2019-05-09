@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by z001qgd on 1/20/18.
  */
-@Component
+//@Component
 @Slf4j
 public class MailProcessor implements Processor {
 

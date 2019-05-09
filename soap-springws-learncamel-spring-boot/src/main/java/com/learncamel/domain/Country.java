@@ -2,32 +2,30 @@ package com.learncamel.domain;
 
 public class Country {
 
-    protected String countrycode;
+    protected String sISOCode;
+    protected String sName;
 
-
-    protected String name;
-
-    public String getCountrycode() {
-        return countrycode;
+    public String getsISOCode() {
+        return sISOCode;
     }
 
-    public void setCountrycode(String countrycode) {
-        this.countrycode = countrycode;
+    public void setsISOCode(String sISOCode) {
+        this.sISOCode = sISOCode;
     }
 
-    public String getName() {
-        return name;
+    public String getsName() {
+        return sName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setsName(String sName) {
+        this.sName = sName;
     }
 
     @Override
     public String toString() {
         return "Country{" +
-                "countrycode='" + countrycode + '\'' +
-                ", name='" + name + '\'' +
+                "sISOCode='" + sISOCode + '\'' +
+                ", sName='" + sName + '\'' +
                 '}';
     }
 }

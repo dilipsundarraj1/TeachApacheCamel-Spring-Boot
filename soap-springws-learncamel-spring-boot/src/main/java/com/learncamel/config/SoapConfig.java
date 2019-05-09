@@ -10,7 +10,7 @@ public class SoapConfig {
     @Bean(value = "webServiceTemplate")
     public WebServiceTemplate createWebServiceTemplate(){
         WebServiceTemplate template = new WebServiceTemplate();
-        template.setDefaultUri("http://www.webservicex.net/country.asmx");
+        template.setDefaultUri("http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso");
         return template;
     }
 

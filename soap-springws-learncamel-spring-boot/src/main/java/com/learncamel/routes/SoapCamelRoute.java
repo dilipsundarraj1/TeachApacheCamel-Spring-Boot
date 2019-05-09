@@ -25,7 +25,7 @@ import java.util.Map;
  * Created by z001qgd on 1/3/18.
  */
 @Component
-public class SoapCamelRoute extends RouteBuilder{
+public class SoapCamelRoute extends RouteBuilder {
 
     @Autowired
     Environment environment;
@@ -38,7 +38,7 @@ public class SoapCamelRoute extends RouteBuilder{
     private WebServiceTemplate webServiceTemplate;
 
 
-    @Autowired
+    // @Autowired
     MailProcessor mailProcessor;
 
     @Autowired
@@ -52,21 +52,28 @@ public class SoapCamelRoute extends RouteBuilder{
     public void configure() throws Exception {
 
 
-        Predicate isNotMock =  header("env").isNotEqualTo("mock");
+        Predicate isNotMock = header("env").isNotEqualTo("mock");
 
         Map<String, String> reference = new HashMap<String, String>();
-        reference.put("Table", Country.class.getName());
+        reference.put("FullCountryInfoResult", Country.class.getName());
 
         XStreamDataFormat xstreamDataFormat = new XStreamDataFormat();
         xstreamDataFormat.setAliases(reference);
+        /**
+         * Omitted Fields SetUp
+         */
+        String[] omittedFieldsArr = new String[]{"sCapitalCity", "sPhoneCode", "sContinentCode", "sCurrencyISOCode", "sCountryFlag", "Languages"};
+        Map<String, String[]> omitedFields = new HashMap<>();
+        omitedFields.put(Country.class.getName(), omittedFieldsArr);
+        xstreamDataFormat.setOmitFields(omitedFields);
         xstreamDataFormat.setPermissions(Country.class.getName()); //Need permission on this class otherwise
 
 
-        onException(PSQLException.class).log(LoggingLevel.ERROR,"PSQLException in the route ${body}")
+        onException(PSQLException.class).log(LoggingLevel.ERROR, "PSQLException in the route ${body}")
                 .maximumRedeliveries(3).redeliveryDelay(3000).backOffMultiplier(2).retryAttemptedLogLevel(LoggingLevel.ERROR);
 
-        onException(DataException.class,RuntimeException.class).log(LoggingLevel.ERROR, "DataException in the route ${body}")
-                .process(mailProcessor);
+        onException(DataException.class, RuntimeException.class).log(LoggingLevel.ERROR, "DataException in the route ${body}");
+        //.process(mailProcessor);
 
 
         from("{{fromRoute}}")
@@ -76,26 +83,23 @@ public class SoapCamelRoute extends RouteBuilder{
                     .log("Inside first choice")
                     .process(requestXMLBuildProcessor)
                     .to("{{toRoute}}")
-                .end()
-                .log("Response from the SOAP call is : ${body}")
-                .transform().xpath("/n:GetCountryByCountryCodeResponse/n:GetCountryByCountryCodeResult/text()", new Namespaces("n", "http://www.webserviceX.NET"))
+                    .end()
+                    .log("Response from the SOAP call is : ${body}")
+                .transform().xpath("/n:FullCountryInfoResponse/n:FullCountryInfoResult", new Namespaces("n", "http://www.oorsprong.org/websamples.countryinfo"))
                 .log("xpath first level : ${body}")
-                .convertBodyTo(String.class)
-                .transform().xpath("/NewDataSet/Table[1]")
-                .log("UnMarshalled output is : ${body}")
-                .unmarshal(xstreamDataFormat)
-                .log("UnMarshalled  xstream output is : ${body}")
+                    .convertBodyTo(String.class)
+                    .unmarshal(xstreamDataFormat)
+                    .log("UnMarshalled  xstream output is : ${body}")
                 .choice()
                 .when(isNotMock)
                     .process(buildSQLProcessor)
                     .to("{{dbNode}}")
                     .to("{{selectNode}}")
-                    .log("Selected Country result is : ${body}" )
+                    .log("Selected Country result is : ${body}")
                     .convertBodyTo(String.class)
-                    .log("Inserted Country is : ${body}" )
+                    .log("Inserted Country is : ${body}")
                 .end();
 
-        }
-
+    }
 
 }

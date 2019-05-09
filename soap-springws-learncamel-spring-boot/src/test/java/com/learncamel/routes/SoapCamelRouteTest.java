@@ -60,11 +60,11 @@ public class SoapCamelRouteTest extends CamelTestSupport {
 
     }
 
-    private String getCountrybyCountryCodeRequest = "<GetCountryByCountryCode xmlns=\"http://www.webserviceX.NET\">\n" +
-            "      <CountryCode>GB</CountryCode>\n" +
-            "    </GetCountryByCountryCode>";
+    private String getCountrybyCountryCodeRequest = "<FullCountryInfo xmlns=\"http://www.oorsprong.org/websamples.countryinfo\">\n" +
+            "      <sCountryISOCode>GB</sCountryISOCode>\n" +
+            "    </FullCountryInfo>";
 
-    private String countryWebServiceUri = "http://www.webservicex.net/country.asmx";
+    private String countryWebServiceUri = "http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso";
 
 
 
