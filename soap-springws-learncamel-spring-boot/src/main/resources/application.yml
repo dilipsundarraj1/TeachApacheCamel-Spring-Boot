@@ -33,7 +33,7 @@ mailFrom: alertsdilip@gmail.com
 
 message:   Hello from MOCK Profile
 fromRoute: direct:input
-toRoute: spring-ws:http://www.webservicex.net/country.asmx?webServiceTemplate=#webServiceTemplate&soapAction=http://www.webserviceX.NET/GetCountryByCountryCode
+toRoute: spring-ws:http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso?webServiceTemplate=#webServiceTemplate&soapAction=http://www.oorsprong.org/websamples.countryinfo/FullCountryInfo
 healthRoute: direct:health
 dbNode: mock:output
 selectNode: mock:output
