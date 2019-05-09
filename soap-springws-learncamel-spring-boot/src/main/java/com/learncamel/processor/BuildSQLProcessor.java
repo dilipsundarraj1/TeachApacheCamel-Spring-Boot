@@ -18,10 +18,10 @@ public class BuildSQLProcessor implements Processor {
         StringBuilder query = new StringBuilder();
 
         query.append("INSERT INTO COUNTRIES (NAME, COUNTRY_CODE) VALUES ('");
-        query.append(country.getName()+"','"+country.getCountrycode()+"');");
+        query.append(country.getsName()+"','"+country.getsISOCode()+"');");
         log.info("Final Query is : " + query);
         exchange.getIn().setBody(query.toString());
-        exchange.getIn().setHeader("countryCode",country.getCountrycode());
+        exchange.getIn().setHeader("countryCode",country.getsISOCode());
 
     }
 

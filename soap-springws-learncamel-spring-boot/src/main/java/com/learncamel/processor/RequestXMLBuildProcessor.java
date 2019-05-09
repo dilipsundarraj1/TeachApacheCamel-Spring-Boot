@@ -16,7 +16,7 @@ public class RequestXMLBuildProcessor implements Processor{
 
     List<String> countryList  = Arrays.asList("US","IN", "GB","CN","JP");
 
-    String countryWebServiceUri = "http://www.webservicex.net/country.asmx";
+    String countryWebServiceUri = "http://www.oorsprong.org/websamples.countryinfo/CountryInfoService.wso";
 
     @Override
     public void process(Exchange exchange) throws Exception {
@@ -37,8 +37,8 @@ exchange.getIn().setHeader(SpringWebserviceConstants.SPRING_WS_ENDPOINT_URI, cou
 
     private  String buildXmlString(){
 
-        return "<GetCountryByCountryCode xmlns=\"http://www.webserviceX.NET\">\n" +
-                "      <CountryCode>ABC</CountryCode>\n" +
-                "    </GetCountryByCountryCode>";
+        return "    <FullCountryInfo xmlns=\"http://www.oorsprong.org/websamples.countryinfo\">\n" +
+                "      <sCountryISOCode>ABC</sCountryISOCode>\n" +
+                "    </FullCountryInfo>";
     }
 }
