@@ -59,3 +59,25 @@ Follow the steps mentioned below to run the app in **Java 11**.
         </dependency>
 
 ```
+
+-   Add the below plugin to support maven in Java 11. 
+
+```youtrack
+   <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                    <jdkToolchain>
+                        <version>11</version>
+                    </jdkToolchain>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+            </plugin>
+```
