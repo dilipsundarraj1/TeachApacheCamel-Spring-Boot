@@ -24,19 +24,7 @@ Follow the steps mentioned below to run the app in **Java 11**.
 ```
 
 -   Add the below latest **lombok** dependency.
-
-
-```$xslt
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
-            <scope>provided</scope>
-        </dependency>
-```
-
--   Add the lastest version of lombok.
-
+s
 ```youtrack
         <dependency>
             <groupId>org.projectlombok</groupId>
