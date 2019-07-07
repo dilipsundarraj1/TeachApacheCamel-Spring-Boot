@@ -5,8 +5,6 @@
 
 ## Run the app in Java 11 ?
 
-## Code Changes to Run in Java 11
-
 - Follow the steps mentioned below to run the app in **Java 11**.
 
 ### Pom.xml
