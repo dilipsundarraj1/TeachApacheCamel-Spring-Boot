@@ -20,6 +20,7 @@ Follow the steps mentioned below to run the app in **Java 11**.
 
 ```$xslt
 <java.version>11</java.version>
+<lombok.version>1.18.4</lombok.version>
 ```
 
 -   Add the below latest **lombok** dependency.
@@ -32,6 +33,17 @@ Follow the steps mentioned below to run the app in **Java 11**.
             <version>1.18.8</version>
             <scope>provided</scope>
         </dependency>
+```
+
+-   Add the lastest version of lombok.
+
+```youtrack
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
 ```
 
 -   Add the **JAXB** related dependecies.
