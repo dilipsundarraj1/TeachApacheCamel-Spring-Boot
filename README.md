@@ -3,12 +3,15 @@
 - This codebase has the complete code for this course
 
 
-## Run the app in Java 11
+## Run the app in Java 11 ?
 
 - Go to the below link which has the complete working code with **java11**.
+
   - [camel-springboot-course-java11](https://github.com/dilipsundarraj1/TeachApacheCamel-Spring-Boot/tree/java11)
 
-Follow the steps mentioned below to run the app in **Java 11**.
+## Code Changes to Run in Java 11
+
+- Follow the steps mentioned below to run the app in **Java 11**.
 
 ### Pom.xml
 
