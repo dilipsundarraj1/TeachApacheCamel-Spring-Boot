@@ -26,6 +26,7 @@ Follow the steps mentioned below to run the app in **Java 11**.
 -   Add the below latest **lombok** dependency.
 s
 ```youtrack
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -37,6 +38,7 @@ s
 -   Add the **JAXB** related dependecies.
 
 ```
+        <!-- JAXB -->
         <dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
