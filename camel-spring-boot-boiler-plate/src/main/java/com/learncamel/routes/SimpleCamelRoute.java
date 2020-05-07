@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 
 /**
- * Created by z001qgd on 1/3/18.
+ * Created by Dilip on 1/3/18.
  */
 @Component
 public class SimpleCamelRoute extends RouteBuilder{

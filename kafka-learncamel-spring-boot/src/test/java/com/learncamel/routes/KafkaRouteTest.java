@@ -34,7 +34,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by z001qgd on 1/4/18.
+ * Created by Dilip on 1/4/18.
  */
 @ActiveProfiles("dev")
 @RunWith(CamelSpringBootRunner.class)

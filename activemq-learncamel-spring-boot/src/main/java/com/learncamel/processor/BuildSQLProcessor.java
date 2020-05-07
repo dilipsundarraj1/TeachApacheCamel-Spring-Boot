@@ -6,7 +6,7 @@ import org.apache.camel.Exchange;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by z001qgd on 2/3/18.
+ * Created by Dilip on 2/3/18.
  */
 @Component
 @Slf4j

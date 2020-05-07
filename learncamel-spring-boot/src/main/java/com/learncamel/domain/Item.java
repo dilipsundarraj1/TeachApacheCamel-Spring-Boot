@@ -6,7 +6,7 @@ import org.apache.camel.dataformat.bindy.annotation.DataField;
 import java.math.BigDecimal;
 
 /**
- * Created by z001qgd on 1/15/18.
+ * Created by Dilip on 1/15/18.
  */
 @CsvRecord( separator = ",",skipFirstLine=true)
 public class Item {

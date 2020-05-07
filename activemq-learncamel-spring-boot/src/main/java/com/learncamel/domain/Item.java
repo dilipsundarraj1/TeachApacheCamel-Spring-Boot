@@ -4,7 +4,7 @@ package com.learncamel.domain;
 import java.math.BigDecimal;
 
 /**
- * Created by z001qgd on 2/1/18.
+ * Created by Dilip on 2/1/18.
  */
 public class Item {
 

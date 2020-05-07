@@ -11,7 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by z001qgd on 1/20/18.
+ * Created by Dilip on 1/20/18.
  */
 @Component
 @Slf4j

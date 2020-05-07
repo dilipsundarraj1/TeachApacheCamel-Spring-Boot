@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by z001qgd on 1/3/18.
+ * Created by Dilip on 1/3/18.
  */
 @Component
 public class SoapCamelRoute extends RouteBuilder {

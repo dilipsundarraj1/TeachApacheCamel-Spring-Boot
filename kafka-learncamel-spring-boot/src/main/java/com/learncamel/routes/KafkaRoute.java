@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 
 /**
- * Created by z001qgd on 1/3/18.
+ * Created by Dilip on 1/3/18.
  */
 @Component
 @Slf4j
@@ -56,8 +56,8 @@ public class KafkaRoute extends RouteBuilder{
                     .when(isNotMock)
                         .process(mailProcessor)
                     .end()
-                    .log("Body in Exception Block is ${body}")
-                    .to("{{errorRoute}}");
+                    .log("Body in Exception Block is ${body}");
+                   // .to("{{errorRoute}}");
 
 
 
@@ -66,9 +66,9 @@ public class KafkaRoute extends RouteBuilder{
                     .unmarshal(itemFormat)
                 .log("UnMarshaled Message is ${body}")
                 .process(validateProcessor)
-                    .process(sqlProcessor)
-                .to("{{toRoute}}")
+                   .process(sqlProcessor)
+                /*.to("{{toRoute}}")
                 .to("{{selectNode}}")
-                .log("Result from the db table is ${body}");
+                */.log("Result from the db table is ${body}");
         }
 }

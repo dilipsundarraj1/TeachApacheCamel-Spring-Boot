@@ -62,7 +62,7 @@ mailFrom: alertsdilip@gmail.com
 
 message:   Hello from DEV Profile
 
-fromRoute: kafka:inputItemTopic?brokers=localhost:9092&groupId=itemdev&autoOffsetReset=earliest&consumersCount=3
+fromRoute: kafka:inputItemTopic?brokers=localhost:9092&groupId=itemdev&autoOffsetReset=earliest&consumersCount=1
 toRoute: jdbc:dataSource
 errorRoute: kafka:errorTopic?brokers=localhost:9092
 selectNode: sql:select * from items where sku = :#skuId?dataSource=#dataSource

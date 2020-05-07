@@ -16,7 +16,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 /**
- * Created by z001qgd on 2/11/18.
+ * Created by Dilip on 2/11/18.
  */
 @ActiveProfiles("mock")
 @RunWith(CamelSpringBootRunner.class)
